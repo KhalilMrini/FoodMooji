@@ -1,51 +1,6 @@
 <head>
 	<script src="http://www.webglearth.com/v2/api.js"></script>
     <script>
-      function initialize() {
-        var options = {
-          sky: true,
-          atmosphere: true,
-          dragging: true,
-          tilting: true,
-          zooming: false,
-          center: [46.8011, 8.2266],
-          zoom: 2
-        };
-        earth = new WE.map('earth_div', options);
-        var natural = WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
-          tileSize: 256,
-          tms: true,
-          scrollWheelZoom: true
-        });
-        natural.addTo(earth);
-
-        var toner = WE.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
-          attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.',
-          opacity: 0.6
-        });
-        toner.addTo(earth);
-
-        earth.on('dblclick', function(e) {
-        	lat = e.latlng.lat
-        	lon = e.latlng.lng
-            var url = "http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=" + lat + "," + lon + "&sensor=false";
-            $.getJSON(url, function (data) {
-                if (data.results) {
-                	d = data.results[data.results.length - 1]
-                	if (d.address_components[0].types.indexOf ('country') > -1) {
-                		document.getElementById('coords').innerHTML = d.address_components[0].long_name;
-                		nelat = d.geometry.bounds.northeast.lat
-                		nelon = d.geometry.bounds.northeast.lng
-                		swlat = d.geometry.bounds.southwest.lat
-                		swlon = d.geometry.bounds.southwest.lng
-                		earth.panInsideBounds([[nelat, nelon],[swlat, swlon]])
-                	}
-                } else {
-                	document.getElementById('coords').innerHTML = "None"
-                }
-            });
-        });
-      }
     </script>
     <style>
       html, body{padding: 0; margin: 0;}
@@ -56,6 +11,6 @@
   <link rel="stylesheet" href="main.css">
 </head>
 
-<body onload="initialize()">
+<body>
   <div id="render-target" class="root"></div>
 </body>

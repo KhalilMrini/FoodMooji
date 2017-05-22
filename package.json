@@ -7,6 +7,7 @@
     "meteor mongo": "MONGO_URL=mongodb://khalil:1477@127.0.0.1:27017/meteor meteor mongo"
   },
   "dependencies": {
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-runtime": "6.18.0",
     "caniuse-api": "^1.6.1",
     "meteor-node-stubs": "~0.2.0",
