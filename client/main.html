@@ -25,26 +25,20 @@
         });
         toner.addTo(earth);
 
-        earth.on('mousemove', function(e) {
+        earth.on('click', function(e) {
         	lat = e.latlng.lat
         	lon = e.latlng.lng
-            var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&sensor=false";
+            var url = "http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=" + lat + "," + lon + "&sensor=false";
             $.getJSON(url, function (data) {
                 if (data.results && data.results[0]) {
                     for (var i = 0; i < data.results[0].address_components.length; i++) {
                         if (data.results[0].address_components[i].types.indexOf ('country') > -1) {
                         	document.getElementById('coords').innerHTML = data.results[0].address_components[i].long_name//e.latlng.lat + ', ' + e.latlng.lng;
-                            var label = new Balloon(
-                                '<div class="text">' +
-                                data.results[0].address_components[i].long_name
-                                + '</div>'
-                                + '<div class="arrow"></div>' );
-                            label.position.copy ( point ).multiplyScalar (1.01) ;
-                            label.addTo(earth);
-                            
-                            break;
+                        	break;
                         }
                     }
+                } else {
+                	document.getElementById('coords').innerHTML = "None"
                 }
             });
         });
