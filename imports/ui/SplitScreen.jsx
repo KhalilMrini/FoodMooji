@@ -69,9 +69,9 @@ export default class SplitScreen extends Component {
       fontFamily: "Palatino Linotype, Times, serif",
       fontSize: "40px"
     };
-    console.log(this.props.country)
     var country = this.props.country ? this.props.country : "World"
     var list = this.state.tweets_country[country]
+    var len = list ? list.length : 0
     return (
       <SplitPane split="vertical" defaultSize="33%" className="primary">
         <SplitPane split="horizontal" defaultSize="50%">
@@ -79,7 +79,7 @@ export default class SplitScreen extends Component {
             <div id="earth_div"></div>
           </div>
           <div>
-            <p>Food list of {country}</p>
+            <p>Food list of {country}: {len} items </p>
             { list ? 
             <ul className='nav nav-pills'>
               {list.map((value) => (
@@ -88,7 +88,6 @@ export default class SplitScreen extends Component {
                 </li>
               ))}
             </ul> : null }
-            <div id="coords"></div>
           </div>
         </SplitPane>
         <SplitPane split="horizontal" defaultSize="10%">

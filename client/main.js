@@ -42,22 +42,17 @@ function init() {
         	lon = e.latlng.lng
             var url = "http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=" + lat + "," + lon + "&sensor=false";
             $.getJSON(url, function (data) {
+            	var country = "World"
                 if (data.results && (d = data.results[data.results.length - 1]) && d.address_components[0].types.indexOf ('country') > -1) {
-                	document.getElementById('coords').innerHTML = d.address_components[0].long_name
-                  document.getElementById('render-target').setAttribute("country", d.address_components[0].long_name)
-                  console.log(d.address_components[0].long_name)
+                  country = d.address_components[0].long_name
                 	nelat = d.geometry.bounds.northeast.lat
               		nelon = d.geometry.bounds.northeast.lng
               		swlat = d.geometry.bounds.southwest.lat
               		swlon = d.geometry.bounds.southwest.lng
               		earth.panInsideBounds([[nelat, nelon],[swlat, swlon]])
                 } else {
-                	document.getElementById('coords').innerHTML = "World"
-                  document.getElementById('render-target').setAttribute("country", "World")
-                  console.log("World")
                   earth.panInsideBounds(bounds)
                 }
-                var country = document.getElementById('render-target').getAttribute("country")
   				render(<SplitScreen id="screen" country={country} />, document.getElementById('render-target'));
             });
         });
