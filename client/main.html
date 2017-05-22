@@ -30,13 +30,16 @@
         	lon = e.latlng.lng
             var url = "http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=" + lat + "," + lon + "&sensor=false";
             $.getJSON(url, function (data) {
-                if (data.results && data.results[0]) {
-                    for (var i = 0; i < data.results[0].address_components.length; i++) {
-                        if (data.results[0].address_components[i].types.indexOf ('country') > -1) {
-                        	document.getElementById('coords').innerHTML = data.results[0].address_components[i].long_name//e.latlng.lat + ', ' + e.latlng.lng;
-                        	break;
-                        }
-                    }
+                if (data.results) {
+                	d = data.results[data.results.length - 1]
+                	if (d.address_components[0].types.indexOf ('country') > -1) {
+                		document.getElementById('coords').innerHTML = d.address_components[0].long_name;
+                		nelat = d.geometry.bounds.northeast.lat
+                		nelon = d.geometry.bounds.northeast.lng
+                		swlat = d.geometry.bounds.southwest.lat
+                		swlon = d.geometry.bounds.southwest.lng
+                		earth.panInsideBounds([[nelat, nelon],[swlat, swlon]])
+                	}
                 } else {
                 	document.getElementById('coords').innerHTML = "None"
                 }
