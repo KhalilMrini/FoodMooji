@@ -1,8 +1,64 @@
 <head>
+	<script src="http://www.webglearth.com/v2/api.js"></script>
+    <script>
+      function initialize() {
+        var options = {
+          sky: true,
+          atmosphere: true,
+          dragging: true,
+          tilting: true,
+          zooming: false,
+          center: [46.8011, 8.2266],
+          zoom: 2
+        };
+        earth = new WE.map('earth_div', options);
+        var natural = WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
+          tileSize: 256,
+          tms: true,
+          scrollWheelZoom: true
+        });
+        natural.addTo(earth);
+
+        var toner = WE.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
+          attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.',
+          opacity: 0.6
+        });
+        toner.addTo(earth);
+
+        earth.on('mousemove', function(e) {
+        	lat = e.latlng.lat
+        	lon = e.latlng.lng
+            var url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&sensor=false";
+            $.getJSON(url, function (data) {
+                if (data.results && data.results[0]) {
+                    for (var i = 0; i < data.results[0].address_components.length; i++) {
+                        if (data.results[0].address_components[i].types.indexOf ('country') > -1) {
+                        	document.getElementById('coords').innerHTML = data.results[0].address_components[i].long_name//e.latlng.lat + ', ' + e.latlng.lng;
+                            var label = new Balloon(
+                                '<div class="text">' +
+                                data.results[0].address_components[i].long_name
+                                + '</div>'
+                                + '<div class="arrow"></div>' );
+                            label.position.copy ( point ).multiplyScalar (1.01) ;
+                            label.addTo(earth);
+                            
+                            break;
+                        }
+                    }
+                }
+            });
+        });
+      }
+    </script>
+    <style>
+      html, body{padding: 0; margin: 0;}
+      #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
+      #coords {position: absolute; bottom: 0;}
+    </style>
   <title>FoodMooji</title>
   <link rel="stylesheet" href="main.css">
 </head>
 
-<body>
+<body onload="initialize()">
   <div id="render-target" class="root"></div>
 </body>

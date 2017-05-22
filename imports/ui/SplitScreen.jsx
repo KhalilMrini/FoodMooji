@@ -20,10 +20,11 @@ class SplitScreen extends Component {
       <SplitPane split="vertical" defaultSize="33%" className="primary">
         <SplitPane split="horizontal" defaultSize="50%">
           <div>
-            <p>Globe {count}</p>
+            <div id="earth_div"></div>
           </div>
           <div>
-            <p>Food list</p>
+            <p>Food list {count}</p>
+            <div id="coords"></div>
           </div>
         </SplitPane>
         <SplitPane split="horizontal" defaultSize="10%">
