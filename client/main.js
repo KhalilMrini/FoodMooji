@@ -87,6 +87,5 @@ if (/WebKit/i.test(navigator.userAgent)) { // sniff
 window.onload = init;
 
 Meteor.startup(() => {
-  var country = document.getElementById('render-target').getAttribute("country")
-  render(<SplitScreen id="screen" country={country} />, document.getElementById('render-target'));
+  render(<SplitScreen id="screen" />, document.getElementById('render-target'));
 });
