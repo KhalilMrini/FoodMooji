@@ -25,7 +25,7 @@
         });
         toner.addTo(earth);
 
-        earth.on('click', function(e) {
+        earth.on('dblclick', function(e) {
         	lat = e.latlng.lat
         	lon = e.latlng.lng
             var url = "http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=" + lat + "," + lon + "&sensor=false";
