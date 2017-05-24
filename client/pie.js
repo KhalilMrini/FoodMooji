@@ -27,39 +27,10 @@ function drawPie(data, country, food) {
 
   arc.append("path")
       .attr("d", path)
-      .attr("fill", function(d) { return color(d.data.key); });
+      .attr("fill", function(d) { return color(d.data.emotion); });
 
   arc.append("text")
       .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
       .attr("dy", "0.35em")
-      .text(function(d) { return d.data.value; });
+      .text(function(d) { return d.data.sum; });
 }
-
-d3.csv("../data/tweets_data.csv", function(d) {
-  d.sum = +d.sum;
-  d.hour = +d.hour;
-  d.emotion = +d.emotion;
-  return d;
-}, function(error, data) {
-  if (error) throw error;
-
-  var byEmotion = d3.nest()
-    .key(function(d) { return d.emotion; })
-    .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
-    .entries(data);
-  console.log(byEmotion);
-
-  var arc = g.selectAll(".arc")
-    .data(pie(byEmotion))
-    .enter().append("g")
-      .attr("class", "arc");
-
-  arc.append("path")
-      .attr("d", path)
-      .attr("fill", function(d) { return color(d.data.key); });
-
-  arc.append("text")
-      .attr("transform", function(d) { return "translate(" + label.centroid(d) + ")"; })
-      .attr("dy", "0.35em")
-      .text(function(d) { return d.data.value; });
-});
