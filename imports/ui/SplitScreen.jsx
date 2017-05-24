@@ -82,7 +82,7 @@ export default class SplitScreen extends Component {
           <FreeScrollBar>
             <p>Food list of <b>{country}</b>: {len} items </p>
             { list ? 
-            <ul className='nav nav-pills'>
+            <ul>
               {list.map((value) => (
                 <li key={value}>
                   {value}
