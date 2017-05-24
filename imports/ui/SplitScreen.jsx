@@ -91,9 +91,9 @@ export default class SplitScreen extends Component {
             </ul> : null }
           </FreeScrollBar>
         </SplitPane>
-        <SplitPane split="horizontal" defaultSize="10%">
+        <SplitPane split="horizontal" defaultSize="15%">
           <div>
-            <h1 style={divStyle}>FoodMooji</h1>
+            <img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" />
           </div>
           <div>
             <p>Graph</p>
