@@ -69,7 +69,7 @@ export default class SplitScreen extends Component {
     this.setState({food: value.split(',')[0]})
   }
 
-  checkIfValueIsFood(value){
+  renderItem(value){
     if (value.split(',')[0] == this.state.food){
       return (
         <li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
@@ -101,7 +101,7 @@ export default class SplitScreen extends Component {
             <p>Food list of <b>{country}</b>: {len} items </p>
             { list ? 
             <ul>
-              {list.map((value) => this.checkIfValueIsFood(value))}
+              {list.map((value) => this.renderItem(value))}
             </ul>
             : null }
           </FreeScrollBar>
