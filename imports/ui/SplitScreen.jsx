@@ -62,7 +62,7 @@ export default class SplitScreen extends Component {
 
   constructor(props){
     super(props);
-    this.state = { tweets_data : processData(), tweets_country : processCountries()};
+    this.state = { tweets_data : processData(), tweets_country : processCountries(), food: "All"};
   }
 
   render() {
@@ -84,8 +84,8 @@ export default class SplitScreen extends Component {
             { list ? 
             <ul>
               {list.map((value) => (
-                <li key={value}>
-                  {value}
+                <li key={value} onClick={() => this.setState({food: value.split(',')[0]})}>
+                  <div id="span_item"><p>{value}</p></div>
                 </li>
               ))}
             </ul> : null }
@@ -96,7 +96,7 @@ export default class SplitScreen extends Component {
             <img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" />
           </div>
           <div>
-            <p>Graph</p>
+            <p>Graph for {this.state.food}</p>
           </div>
         </SplitPane>
       </SplitPane>)
