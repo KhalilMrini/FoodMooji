@@ -1,0 +1,8 @@
+1,Joy,"#e4e429"
+2,Trust,"#29e487"
+3,Fear,"#29e429"
+4,Surprise,"#29e4e4"
+5,Sadness,"#2929e4"
+6,Disgust,"#e42987"
+7,Anger,"#e42929"
+8,Anticipation,"#e48729"
