@@ -19,6 +19,7 @@ var label = d3.arc()
     .innerRadius(radius - 40);
 
 var country = "Australia";
+var food = "coffee";
 d3.csv("../data/tweets_data.csv", function(d) {
   d.sum = +d.sum;
   d.hour = +d.hour;
@@ -28,7 +29,7 @@ d3.csv("../data/tweets_data.csv", function(d) {
   if (error) throw error;
 
   var byCountry = data.filter(function(d) {
-    if (d["country"] == country) {
+    if (d["country"] == country & d["food"] == food) {
       return d;
     }
   });
