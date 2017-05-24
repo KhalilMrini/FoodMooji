@@ -99,11 +99,7 @@ export default class SplitScreen extends Component {
           </div>
           <FreeScrollBar>
             <p>Food list of <b>{country}</b>: {len} items </p>
-            { list ? 
-            <ul>
-              {list.map((value) => this.renderItem(value))}
-            </ul>
-            : null }
+            { list ? <ul>{list.map((value) => this.renderItem(value))}</ul> : null }
           </FreeScrollBar>
         </SplitPane>
         <SplitPane split="horizontal" defaultSize="15%">
