@@ -71,13 +71,15 @@ export default class SplitScreen extends Component {
 
   checkIfValueIsFood(value){
     if (value.split(',')[0] == this.state.food){
-      return (<li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
-                   <p id="p_item">{value}</p>
-                </li>)
+      return (
+        <li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+          <p id="p_item">{value}</p>
+        </li>)
     } else {
-      return (<li className="span_item" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
-                   <p id="p_item">{value}</p>
-                </li>)
+      return (
+        <li className="span_item" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+          <p id="p_item">{value}</p>
+        </li>)
     }
   }
 
@@ -100,7 +102,8 @@ export default class SplitScreen extends Component {
             { list ? 
             <ul>
               {list.map((value) => this.checkIfValueIsFood(value))}
-            </ul> : null }
+            </ul>
+            : null }
           </FreeScrollBar>
         </SplitPane>
         <SplitPane split="horizontal" defaultSize="15%">
