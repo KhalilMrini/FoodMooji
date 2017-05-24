@@ -65,6 +65,22 @@ export default class SplitScreen extends Component {
     this.state = { tweets_data : processData(), tweets_country : processCountries(), food: "All"};
   }
 
+  handleClick(value) {
+    this.setState({food: value.split(',')[0]})
+  }
+
+  checkIfValueIsFood(value){
+    if (value.split(',')[0] == this.state.food){
+      return (<li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+                   <p id="p_item">{value}</p>
+                </li>)
+    } else {
+      return (<li className="span_item" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+                   <p id="p_item">{value}</p>
+                </li>)
+    }
+  }
+
   render() {
   	var divStyle = {
       fontFamily: "Palatino Linotype, Times, serif",
@@ -83,11 +99,7 @@ export default class SplitScreen extends Component {
             <p>Food list of <b>{country}</b>: {len} items </p>
             { list ? 
             <ul>
-              {list.map((value) => (
-                <li key={value} onClick={() => this.setState({food: value.split(',')[0]})}>
-                  <div id="span_item"><p>{value}</p></div>
-                </li>
-              ))}
+              {list.map((value) => this.checkIfValueIsFood(value))}
             </ul> : null }
           </FreeScrollBar>
         </SplitPane>
