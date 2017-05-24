@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SplitPane from 'react-split-pane';
 import { createContainer } from 'react-meteor-data'
 import { Meteor } from 'meteor/meteor'
+import FreeScrollBar from 'react-free-scrollbar'
 
 function readStringFromFileAtPath(pathOfFileToReadFrom){
   var request = new XMLHttpRequest();
@@ -78,8 +79,8 @@ export default class SplitScreen extends Component {
           <div>
             <div id="earth_div"></div>
           </div>
-          <div>
-            <p>Food list of {country}: {len} items </p>
+          <FreeScrollBar>
+            <p>Food list of <b>{country}</b>: {len} items </p>
             { list ? 
             <ul className='nav nav-pills'>
               {list.map((value) => (
@@ -88,7 +89,7 @@ export default class SplitScreen extends Component {
                 </li>
               ))}
             </ul> : null }
-          </div>
+          </FreeScrollBar>
         </SplitPane>
         <SplitPane split="horizontal" defaultSize="10%">
           <div>
