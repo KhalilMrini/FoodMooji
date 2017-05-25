@@ -19,25 +19,6 @@ function compareNumbers(a, b) {
   return value_b - value_a;
 }
 
-function processData() {
-  var text = readStringFromFileAtPath("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_data.csv")
-  var raw_lines = text.split('\n')
-  var headers = raw_lines[0].split(',')
-  var object = new Object()
-  for (var i = 1; i < raw_lines.length; i++){
-    var elements = raw_lines[i].split(',')
-    var index = ""
-    for (var j = 0; j < elements.length - 1; j++){
-      if (j > 0){
-        index = index + ","
-      }
-      index = index + elements[j]
-    }
-    object[index] = elements[elements.length - 1]
-  }
-  return object
-}
-
 function processCountries() {
   var text = readStringFromFileAtPath("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_country.csv")
   var raw_lines = text.split('\n')
@@ -63,7 +44,7 @@ export default class SplitScreen extends Component {
 
   constructor(props){
     super(props);
-    this.state = { tweets_data : processData(), tweets_country : processCountries(), food: "All"};
+    this.state = { tweets_country : processCountries(), food: "All"};
   }
 
   handleClick(value) {
@@ -93,7 +74,6 @@ export default class SplitScreen extends Component {
     var list = this.state.tweets_country[country]
     var len = list ? list.length : 0
     console.log(country + " " + this.state.food)
-    console.log(document)
     return (
       <SplitPane split="vertical" defaultSize="33%" className="primary">
         <SplitPane split="horizontal" defaultSize="50%">
