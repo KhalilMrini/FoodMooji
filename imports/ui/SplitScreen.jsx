@@ -3,6 +3,7 @@ import SplitPane from 'react-split-pane';
 import { createContainer } from 'react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import FreeScrollBar from 'react-free-scrollbar'
+import PieChart from './PieChart.js'
 
 function readStringFromFileAtPath(pathOfFileToReadFrom){
   var request = new XMLHttpRequest();
@@ -91,20 +92,28 @@ export default class SplitScreen extends Component {
     var country = this.props.country ? this.props.country : "World"
     var list = this.state.tweets_country[country]
     var len = list ? list.length : 0
+    console.log(country + " " + this.state.food)
+    console.log(document)
     return (
       <SplitPane split="vertical" defaultSize="33%" className="primary">
         <SplitPane split="horizontal" defaultSize="50%">
-          <div>
-            <div id="earth_div"></div>
-          </div>
+          <div id="earth_div"></div>
           <FreeScrollBar>
-            <p>Food list of <b>{country}</b>: {len} items </p>
+            <p>Food most tweeted about in <b>{country}</b>: {len} items </p>
             { list ? <ul>{list.map((value) => this.renderItem(value))}</ul> : null }
           </FreeScrollBar>
         </SplitPane>
         <SplitPane split="horizontal" defaultSize="15%">
-          <div><img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" /></div>
-          <div><p>Graph for {this.state.food}</p></div>
+          <div id="title"><img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" /></div>
+          <div id="graph_div">
+            <p>Graph for {this.state.food}</p>
+            <PieChart
+              width={document.getElementById("render-target").offsetWidth*0.67}
+              height="500"
+              radius="250"
+              country={country}
+              food={this.state.food} />
+          </div>
         </SplitPane>
       </SplitPane>)
   }
