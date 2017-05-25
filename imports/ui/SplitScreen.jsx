@@ -40,6 +40,12 @@ function processCountries() {
   return object
 }
 
+// When the user clicks on <div>, open the popup
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+
 export default class SplitScreen extends Component {
 
   constructor(props){
@@ -86,6 +92,16 @@ export default class SplitScreen extends Component {
         <SplitPane split="horizontal" defaultSize="15%">
           <div id="title"><img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" /></div>
           <div id="graph_div">
+            <div style={{textAlign: "right", width: "90%"}}>
+              <div className="popup" onMouseOver={myFunction} onMouseOut={myFunction} style={{
+                  textAlign: "right", width: 30, height: 30,
+                  backgroundImage: 'url("http://www.inspativity.com/wp-content/uploads/2016/03/i-icon-1-227x300.png")',
+                  backgroundRepeat: 'no-repeat', backgroundSize: '20'
+              }} alt="info">
+              <span className="popuptext" id="myPopup">We filter food words as well as emojis
+                in Millions of Tweets, and 'translate' emojis into 8-emotion categories. </span>
+              </div>
+            </div>
             <p>Graph for {this.state.food}</p>
             <PieChart
               width={document.getElementById("render-target").offsetWidth*0.67}
