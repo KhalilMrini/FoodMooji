@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import SplitPane from 'react-split-pane';
 import { createContainer } from 'react-meteor-data'
 import { Meteor } from 'meteor/meteor'
+import FreeScrollBar from 'react-free-scrollbar'
+import PieChart from './PieChart.js'
 
 function readStringFromFileAtPath(pathOfFileToReadFrom){
   var request = new XMLHttpRequest();
@@ -17,6 +19,7 @@ function compareNumbers(a, b) {
   return value_b - value_a;
 }
 
+<<<<<<< HEAD
 function processData() {
   var text = readStringFromFileAtPath("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_data.csv")
   var raw_lines = text.split('\n')
@@ -34,6 +37,8 @@ function processData() {
   return lines;
 }
 
+=======
+>>>>>>> master
 function processCountries() {
   var text = readStringFromFileAtPath("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_country.csv")
   var raw_lines = text.split('\n')
@@ -55,15 +60,39 @@ function processCountries() {
   return object
 }
 
+// When the user clicks on <div>, open the popup
+function myFunction() {
+    var popup = document.getElementById("myPopup");
+    popup.classList.toggle("show");
+}
+
 export default class SplitScreen extends Component {
 
   constructor(props){
     super(props);
-    this.state = { tweets_data : processData(), tweets_country : processCountries()};
+    this.state = { tweets_country : processCountries(), food: "All"};
+  }
+
+  handleClick(value) {
+    this.setState({food: value.split(',')[0]})
+  }
+
+  renderItem(value){
+    if (value.split(',')[0] == this.state.food){
+      return (
+        <li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+          <p id="p_item">{value}</p>
+        </li>)
+    } else {
+      return (
+        <li className="span_item" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+          <p id="p_item">{value}</p>
+        </li>)
+    }
   }
 
   render() {
-  	var divStyle = {
+      var divStyle = {
       fontFamily: "Palatino Linotype, Times, serif",
       fontSize: "40px"
     };
@@ -72,24 +101,17 @@ export default class SplitScreen extends Component {
 console.log(list);
     var list = this.state.tweets_data;
     var len = list ? list.length : 0
+    console.log(country + " " + this.state.food)
     return (
       <SplitPane split="vertical" defaultSize="33%" className="primary">
         <SplitPane split="horizontal" defaultSize="50%">
-          <div>
-            <div id="earth_div"></div>
-          </div>
-          <div>
-            <p>Food list of {country}: {len} items </p>
-            { list ? 
-            <ul className='nav nav-pills'>
-              {list.map((value) => (
-                <li key={value}>
-                  {value}
-                </li>
-              ))}
-            </ul> : null }
-          </div>
+          <div id="earth_div"></div>
+          <FreeScrollBar>
+            <p>Food most tweeted about in <b>{country}</b>: {len} items </p>
+            { list ? <ul>{list.map((value) => this.renderItem(value))}</ul> : null }
+          </FreeScrollBar>
         </SplitPane>
+<<<<<<< HEAD
         <SplitPane split="horizontal" defaultSize="10%">
           <div>
             <h1 style={divStyle}>FoodMooji</h1>
@@ -97,6 +119,28 @@ console.log(list);
           <div>
             <p>Graph</p>
             <p>{drawPie(list, country, "All")}</p>
+=======
+        <SplitPane split="horizontal" defaultSize="15%">
+          <div id="title"><img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" /></div>
+          <div id="graph_div">
+            <div style={{textAlign: "right", width: "90%"}}>
+              <div className="popup" onMouseOver={myFunction} onMouseOut={myFunction} style={{
+                  textAlign: "right", width: 30, height: 30,
+                  backgroundImage: 'url("http://www.inspativity.com/wp-content/uploads/2016/03/i-icon-1-227x300.png")',
+                  backgroundRepeat: 'no-repeat', backgroundSize: '20'
+              }} alt="info">
+              <span className="popuptext" id="myPopup">We filter food words as well as emojis
+                in Millions of Tweets, and 'translate' emojis into 8-emotion categories. </span>
+              </div>
+            </div>
+            <p>Graph for {this.state.food}</p>
+            <PieChart
+              width={document.getElementById("render-target").offsetWidth*0.67}
+              height="500"
+              radius="250"
+              country={country}
+              food={this.state.food} />
+>>>>>>> master
           </div>
         </SplitPane>
       </SplitPane>)
