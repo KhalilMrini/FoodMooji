@@ -1,0 +1,16 @@
+<head>
+  <script src="multirange.js"></script>
+  <link rel="stylesheet" href="multirange.css">
+
+  <script>
+  function outputUpdate(low, high) { console.log(low + "," + high); }
+  </script>
+</head>
+
+<html>
+  <body>
+    <input id="time" type="range" multiple value="9,17" min="0" max="23"
+      step="1" oninput="outputUpdate(valueLow, valueHigh)"/>
+  </body>
+</html>
+
