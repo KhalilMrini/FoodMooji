@@ -22,24 +22,17 @@ function init() {
           zoom: 2
         };
         earth = new WE.map('earth_div', options);
-        var natural = WE.tileLayer('http://data.webglearth.com/natural-earth-color/{z}/{x}/{y}.jpg', {
-          tileSize: 256,
-          tms: true,
-          scrollWheelZoom: true
-        });
-        natural.addTo(earth);
-
-        var toner = WE.tileLayer('http://tile.stamen.com/toner/{z}/{x}/{y}.png', {
-          attribution: 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA.',
-          opacity: 0.6
-        });
-        toner.addTo(earth);
+        WE.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+        }).addTo(earth);
 
         var bounds = earth.getBounds()
 
         earth.on('dblclick', function(e) {
         	lat = e.latlng.lat
         	lon = e.latlng.lng
+          console.log(lat)
+          console.log(lon)
             var url = "http://maps.googleapis.com/maps/api/geocode/json?language=en&latlng=" + lat + "," + lon + "&sensor=false";
             $.getJSON(url, function (data) {
             	var country = "World"
