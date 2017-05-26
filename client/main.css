@@ -8,6 +8,23 @@ body {
   padding: 0;
   height: 100%;
 }
+#buttons {
+  position: absolute; 
+  bottom:20px; 
+  left: 10px;
+}
+
+#layercontrol{
+  position: absolute; 
+  top:10px; 
+  right: 10px;
+  color: white;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
 li { list-style-type: none; }
 li.span_item {
   color: #252525;
@@ -28,7 +45,17 @@ img {
   height: 100%;
 }
 p, h1{margin-left: 0.5cm;}
-
+.onMap{
+  margin:0;
+  margin-left:0.1cm;
+  padding:0;
+  color: white;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
 /* class divs */
 #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
 
@@ -39,6 +66,10 @@ p, h1{margin-left: 0.5cm;}
   min-height: 100%;
 }
 #p_item { margin: 0.1cm; }
+
+.slider {
+  margin: 1cm;
+}
 
 /* Popup container */
 .popup {

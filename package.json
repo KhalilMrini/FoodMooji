@@ -12,6 +12,7 @@
     "caniuse-api": "^1.6.1",
     "d3": "^4.9.1",
     "d3-scale": "^1.0.6",
+    "ion-rangeslider": "^2.1.7",
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.5.4",
     "react-addons-pure-render-mixin": "^15.0.1",

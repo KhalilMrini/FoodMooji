@@ -72,7 +72,7 @@ export default class SplitScreen extends Component {
   }
 
   render() {
-      var divStyle = {
+    var divStyle = {
       fontFamily: "Palatino Linotype, Times, serif",
       fontSize: "40px"
     };
@@ -80,12 +80,24 @@ export default class SplitScreen extends Component {
     var list = this.state.tweets_country[country]
     var len = list ? list.length : 0
     console.log(country + " " + this.state.food)
+    var from = this.props.from ? this.props.from : 0
+    var to = this.props.to ? this.props.to : 24
     return (
       <SplitPane split="vertical" defaultSize="33%" className="primary">
         <SplitPane split="horizontal" defaultSize="50%">
-          <div id="earth_div"></div>
+          <div>
+            <div id="earth_div"></div>
+            <div id="buttons">
+              <p className="onMap"><b>{country}</b></p>
+              <input type="button" id="backToWorld" value="Go Back to World" />
+            </div>
+            <div id="layercontrol">
+              –<input type="range" id="opacity2" min="0" max="18" step="1" value="2" onChange={function (e){ this.props.value = e.target.value;}} />+<br />
+            </div>
+            //<span className="popuptext" id="countryPopup">We filter food words as well as emojis in Millions of Tweets, and 'translate' emojis into 8-emotion categories. </span>
+          </div>
           <FreeScrollBar>
-            <p>Food most tweeted about in <b>{country}</b>: {len} items </p>
+            <p>Food tweeted about in <b>{country}</b>: {len} items </p>
             { list ? <ul>{list.map((value) => this.renderItem(value))}</ul> : null }
           </FreeScrollBar>
         </SplitPane>
@@ -108,7 +120,16 @@ export default class SplitScreen extends Component {
               height="500"
               radius="250"
               country={country}
-              food={this.state.food} />
+              food={this.state.food}
+              from={from}
+              to={to} />
+            <SplitPane split="vertical" defaultSize="10%">
+              <div></div>
+              <SplitPane split="vertical" defaultSize="89%">
+                <div id="slider"><input type="rangeslide" /></div>
+                <div></div>
+              </SplitPane>
+            </SplitPane>
           </div>
         </SplitPane>
       </SplitPane>)

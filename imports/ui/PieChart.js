@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 var d3PieChart = {};
 
-d3PieChart.create = function(el, props, country, food) {
+d3PieChart.create = function(el, props, country, food, from, to) {
     var viz = d3.select(el)
       .append('svg:svg')
         .attr('class', 'd3')
@@ -13,10 +13,10 @@ d3PieChart.create = function(el, props, country, food) {
       .append("svg:g")
         .attr("transform", "translate(" + props.width / 2 + "," + props.height / 2 + ")");
 
-    this.update(el, country, food);
+    this.update(el, country, food, from, to);
 }
 
-d3PieChart.update = function(el, country, food) {
+d3PieChart.update = function(el, country, food, from, to) {
     this.destroy(el);
     var pie = d3.layout.pie()
         .value(function(d) { return d.values; });
@@ -42,7 +42,7 @@ d3PieChart.update = function(el, country, food) {
       if (error) throw error;
 
       var byCountry = data.filter(function(d) {
-        if (d["country"] == country & d["food"] == food) {
+        if (d["country"] == country & d["food"] == food & d["hour"] >= from & d["hour"] < to) {
           return d;
         }
       });
@@ -85,12 +85,12 @@ export default class PieChart extends Component {
       width: this.props.width,
       height: this.props.height,
       radius: this.props.radius
-    }, this.props.country, this.props.food);
+    }, this.props.country, this.props.food, this.props.from, this.props.to);
   }
 
   componentDidUpdate() {
     var el = ReactDOM.findDOMNode(this);
-    d3PieChart.update(el, this.props.country, this.props.food);
+    d3PieChart.update(el, this.props.country, this.props.food, this.props.from, this.props.to);
   }
 
   componentWillUnmount(){
