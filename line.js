@@ -59,17 +59,17 @@ d3.tsv("linechart.tsv", type, function(error, data) {
       .attr("fill", "#000")
       .text("Nº of Tweets");
 
-  var emotion = g.selectAll(".amotion")
+  var city = g.selectAll(".city")
     .data(emotions)
     .enter().append("g")
-      .attr("class", "emotion");
+      .attr("class", "city");
 
-  emotion.append("path")
+  city.append("path")
       .attr("class", "line")
       .attr("d", function(d) { return line(d.values); })
       .style("stroke", function(d) { return z(d.id); });
 
-  emotion.append("text")
+  city.append("text")
       .datum(function(d) { return {id: d.id, value: d.values[d.values.length - 1]}; })
       .attr("transform", function(d) { return "translate(" + x(d.value.date) + "," + y(d.value.tweets) + ")"; })
       .attr("x", 3)
@@ -83,6 +83,5 @@ function type(d, _, columns) {
   d.date = parseTime(d.date);
   for (var i = 1, n = columns.length, c; i < n; ++i)
     d[c = columns[i]] = +d[c]
-    console.log();
   return d;
 }
