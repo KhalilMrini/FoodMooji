@@ -72,7 +72,7 @@ export default class SplitScreen extends Component {
   }
 
   render() {
-  	var divStyle = {
+      var divStyle = {
       fontFamily: "Palatino Linotype, Times, serif",
       fontSize: "40px"
     };
