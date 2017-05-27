@@ -1,6 +1,7 @@
-/* html */
+/* html url("https://cdn-images-1.medium.com/max/1920/1*AcYLHh0_ve4TNRi6HLFcPA.jpeg"); */
 body {
-  background-image: url('http://www.wallpaperup.com/uploads/wallpapers/2013/02/22/43280/big_thumb_0a2c0e71f4db26592888ecad37fe72fc.jpg');
+  background-image: url("https://cdn-images-1.medium.com/max/1920/1*AcYLHh0_ve4TNRi6HLFcPA.jpeg");
+  -webkit-background-size: cover;
   background-color: rgba(25,25,25,0.1);
   background-blend-mode: darken;
   font-family: Arial,Helvetica,sans-serif;
@@ -40,19 +41,13 @@ input[type=text]:focus {
   top:10px; 
   right: 10px;
   color: white;
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000; 
+  text-shadow: 0 0 3px #000;
 }
-
 ul {
   /*text-align: center;*/
   position: relative;
   left: 5%;
 }
-
 li {
   text-align: center;
   -webkit-text-size-adjust: auto;
@@ -107,7 +102,6 @@ p, h1{margin-left: 0.5cm;}
   min-height: 100%;
 }
 #p_item { margin: 0.1cm; }
-
 .slider {
   margin: 1cm;
 }

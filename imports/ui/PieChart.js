@@ -92,10 +92,11 @@ d3PieChart.update = function(el, props, country, food, from, to) {
         label: labels[i],
         value: byEmotion[i].values,
         color: colors[i],
-        caption: byEmotion[i].values + " tweets"
+        caption: byEmotion[i].values + " tweets for " + labels[i]
       })
     }
     pie.updateProp("data.content", pieData);
+    pie.updateProp("header.title.text", "Distribution of emotion for " + food);
   });
 }
 
