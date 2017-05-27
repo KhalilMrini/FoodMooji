@@ -1,0 +1,79 @@
+<head>
+<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+<script src="d3pie.min.js"></script>
+</head>
+
+<html>
+  <body>
+  <div id="pieChart"></div>
+<script>
+var country = "Australia";
+var food = "pizza";
+var from = "12";
+var to = "16";
+d3.csv("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_data.csv", function(d) {
+  d.sum = +d.sum;
+  d.hour = +d.hour;
+  d.emotion = +d.emotion;
+  return d;
+}, function(error, data) {
+  if (error) throw error;
+
+  var byCountry = data.filter(function(d) {
+    if (d["country"] == country & d["food"] == food & d["hour"] >= from & d["hour"] < to) {
+      return d;
+    }
+  });
+
+  var byEmotion = d3.nest()
+    .key(function(d) { return d.emotion; })
+    .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
+    .entries(byCountry);
+  console.log(byEmotion);
+
+  var labels = ["joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation"];
+  var colors = ["#efef84", "#baef84", "#84ef84", "#84baef",
+               "#8484ef", "#ef84ef", "#ef8484", "#efba84"];
+
+  pieData = [];
+  for (var i = 0; i < byEmotion.length; i++) {
+    pieData.push({
+      label: labels[i],
+      value: byEmotion[i].value,
+      color: colors[i],
+      caption: byEmotion[i].value + " tweets"
+    })
+  console.log(pieData);
+  }
+
+  var pie = new d3pie("pieChart", {
+  header: {
+    title: {
+      text: "Distribution of emotion for " + food
+    },
+    location: "pie-center"
+  },
+  size: {
+    pieInnerRadius: "75%",
+    pieOuterRadius: "100%"
+  },
+  "data": {
+      "content": pieData
+  },
+  labels: {
+      inner: {
+        format: ""
+      }
+  },
+  tooltips: {
+    enabled: true,
+    type: "placeholder",
+    string: "{value} tweets ({percentage}%)",
+    styles: {fontSize: 16}
+  }
+  });
+});
+</script>
+  </body>
+</html>
+
