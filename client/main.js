@@ -11,6 +11,7 @@ import './main.html';
 var from = 0;
 var to = 24;
 var country = "World"
+var food = "All"
 
 function init() {
 	if (arguments.callee.done) 

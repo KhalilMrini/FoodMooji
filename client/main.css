@@ -69,6 +69,8 @@ p, h1{margin-left: 0.5cm;}
   margin-left:0.1cm;
   padding:0;
   color: white;
+  font-family:Palatino Linotype, Times, serif;
+  font-size: 20pt;
   text-shadow:
     -1px -1px 0 #000,
     1px -1px 0 #000,

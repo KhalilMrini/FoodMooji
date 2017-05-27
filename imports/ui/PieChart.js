@@ -1,77 +1,106 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
+import d3pie from 'd3pie'
+
+var pie;
 
 var d3PieChart = {};
 
 d3PieChart.create = function(el, props, country, food, from, to) {
-    var viz = d3.select(el)
-      .append('svg:svg')
-        .attr('class', 'd3')
-        .attr('width', props.width)
-        .attr('height', props.height)
-        .attr('radius', props.radius)
-      .append("svg:g")
-        .attr("transform", "translate(" + props.width / 2 + "," + props.height / 2 + ")");
-
-    this.update(el, country, food, from, to);
+  d3.csv("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_data.csv", function(d) {
+    d.sum = +d.sum;
+    d.hour = +d.hour;
+    d.emotion = +d.emotion;
+    return d;
+  }, function(error, data) {
+    if (error) throw error;
+    var byCountry = data.filter(function(d) {
+      if (d["country"] == country & d["food"] == food & d["hour"] >= from & d["hour"] < to) {
+        return d;
+      }
+    });
+    var byEmotion = d3.nest()
+      .key(function(d) { return d.emotion; })
+      .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
+      .entries(byCountry);
+    var labels = ["joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation"];
+    var colors = ["#efef84", "#baef84", "#84ef84", "#84baef",
+                 "#8484ef", "#ef84ef", "#ef8484", "#efba84"];
+    pieData = [];
+    for (var i = 0; i < byEmotion.length; i++) {
+      pieData.push({
+        label: labels[i],
+        value: byEmotion[i].values,
+        color: colors[i],
+        caption: byEmotion[i].values + " tweets"
+      })
+    }
+    pie = new d3pie(el, {
+      header: {
+        title: {
+          text: "Distribution of emotion for " + food
+        },
+        location: "pie-center"
+      },
+      size: {
+        canvasHeight: props.height,
+        canvasWidth: props.width,
+        pieInnerRadius: "75%",
+        pieOuterRadius: "100%"
+      },
+      "data": {
+          "content": pieData
+      },
+      labels: {
+          inner: {
+            format: ""
+          }
+      },
+      tooltips: {
+        enabled: true,
+        type: "placeholder",
+        string: "{value} tweets ({percentage}%)",
+        styles: {fontSize: 16}
+      }
+    });
+  });
 }
 
-d3PieChart.update = function(el, country, food, from, to) {
-    this.destroy(el);
-    var pie = d3.layout.pie()
-        .value(function(d) { return d.values; });
-
-    var color = {"1":"#efef84", "2":"#baef84", "3":"#84ef84", "4":"#84baef",
-                 "5":"#8484ef", "6":"#ef84ef", "7":"#ef8484", "8":"#efba84"};
-
-    var radius = d3.select(el).select('svg').attr('radius')
-
-    var path = d3.svg.arc()
-        .outerRadius(radius - 10)
-        .innerRadius(0);
-
-    var label = d3.svg.arc()
-        .outerRadius(radius - 40)
-        .innerRadius(radius - 40);
-
-    d3.csv("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_data.csv", function(d) {
-      d.sum = +d.sum;
-      d.hour = +d.hour;
-      d.emotion = +d.emotion;
-      return d;
-    }, function(error, data) {
-      if (error) throw error;
-
-      var byCountry = data.filter(function(d) {
-        if (d["country"] == country & d["food"] == food & d["hour"] >= from & d["hour"] < to) {
-          return d;
-        }
-      });
-
-      var byEmotion = d3.nest()
-        .key(function(d) { return d.emotion; })
-        .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
-        .entries(byCountry);
-
-      var arcs = d3.select(el).select('svg').select('g').selectAll("g.slice")
-          .data(pie(byEmotion))
-          .enter()
-        .append("svg:g")
-          .attr("class", "slice");
-
-      arcs.append("svg:path")
-        .attr("fill", function(d) { return color[d.data.key]; })
-        .attr("d", path);
-
-      arcs.append("svg:text")
-        .attr("transform", function(d) { return "translate(" + label.centroid(d) +")"; })
-        .attr("dy", "0.35em")
-        .text(function(d) { return d.value; });
-      });
+d3PieChart.update = function(el, props, country, food, from, to) {
+  d3.csv("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_data.csv", function(d) {
+    d.sum = +d.sum;
+    d.hour = +d.hour;
+    d.emotion = +d.emotion;
+    return d;
+  }, function(error, data) {
+    if (error) throw error;
+    var byCountry = data.filter(function(d) {
+      if (d["country"] == country & d["food"] == food & d["hour"] >= from & d["hour"] < to) {
+        return d;
+      }
+    });
+    var byEmotion = d3.nest()
+      .key(function(d) { return d.emotion; })
+      .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
+      .entries(byCountry);
+    var labels = ["joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation"];
+    var colors = ["#efef84", "#baef84", "#84ef84", "#84baef",
+                 "#8484ef", "#ef84ef", "#ef8484", "#efba84"];
+    pieData = [];
+    for (var i = 0; i < byEmotion.length; i++) {
+      pieData.push({
+        label: labels[i],
+        value: byEmotion[i].values,
+        color: colors[i],
+        caption: byEmotion[i].values + " tweets"
+      })
+    }
+    pie.updateProp("data.content", pieData);
+  });
 }
 
 d3PieChart.destroy = function (el){
-  d3.select(el).select('svg').select('g').selectAll("g.slice").remove();
+  d3.select(el).select('svg').remove();
 }
 
 export default class PieChart extends Component {
@@ -84,14 +113,16 @@ export default class PieChart extends Component {
     var el = ReactDOM.findDOMNode(this);
     d3PieChart.create(el, {
       width: this.props.width,
-      height: this.props.height,
-      radius: this.props.radius
+      height: this.props.height
     }, this.props.country, this.props.food, this.props.from, this.props.to);
   }
 
   componentDidUpdate() {
     var el = ReactDOM.findDOMNode(this);
-    d3PieChart.update(el, this.props.country, this.props.food, this.props.from, this.props.to);
+    d3PieChart.update(el, {
+      width: this.props.width,
+      height: this.props.height
+    }, this.props.country, this.props.food, this.props.from, this.props.to);
   }
 
   componentWillUnmount(){
@@ -101,7 +132,7 @@ export default class PieChart extends Component {
 
   render() {
     return (
-      <div className="PieChart"></div>
+      <div className="PieChart" id="pieChart"></div>
     );
   }
 }
