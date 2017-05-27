@@ -57,7 +57,10 @@ d3PieChart.create = function(el, props, country, food, from, to) {
       labels: {
           inner: {
             format: ""
-          }
+          },
+          "mainLabel": {
+            "fontSize": 16
+          },
       },
       tooltips: {
         enabled: true,
