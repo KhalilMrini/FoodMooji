@@ -94,7 +94,7 @@ export default class SplitScreen extends Component {
     var from = this.props.from ? this.props.from : 0
     var to = this.props.to ? this.props.to : 24
     return (
-      <SplitPane split="vertical" defaultSize="33%" className="primary">
+      <SplitPane split="vertical" defaultSize="30%" className="primary">
         <SplitPane split="horizontal" defaultSize="50%">
           <div>
             <div id="earth_div"></div>
@@ -141,9 +141,9 @@ export default class SplitScreen extends Component {
           <div id="graph_div">
             <div style={{textAlign: "right", width: "90%"}}>
               <div className="popup" onMouseOver={myFunction} onMouseOut={myFunction} style={{
-                  textAlign: "right", width: 30, height: 30,
-                  backgroundImage: 'url("http://www.inspativity.com/wp-content/uploads/2016/03/i-icon-1-227x300.png")',
-                  backgroundRepeat: 'no-repeat', backgroundSize: 20
+                  textAlign: "right", width: 50, height: 50,
+                  backgroundImage: 'url("http://www.freeiconspng.com/uploads/file-light-bulb-yellow-icon-svg-2.png")',
+                  backgroundRepeat: 'no-repeat', backgroundSize: 40
               }} alt="info">
               <span className="popuptext" id="myPopup">We filter food words as well as emojis
                 in Millions of Tweets, and 'translate' emojis into 8-emotion categories. </span>

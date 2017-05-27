@@ -1,6 +1,8 @@
 /* html */
 body {
-  background-color: #252525;
+  background-image: url('http://www.wallpaperup.com/uploads/wallpapers/2013/02/22/43280/big_thumb_0a2c0e71f4db26592888ecad37fe72fc.jpg');
+  background-color: rgba(25,25,25,0.1);
+  background-blend-mode: darken;
   font-family: Arial,Helvetica,sans-serif;
   color: #cccccc;
   font-size: 16pt;
@@ -14,7 +16,7 @@ body {
   left: 10px;
 }
 input[type=text] {
-    height:100%;
+    height:90%;
     margin:0;
     width:100%;
     box-sizing: border-box;
@@ -31,7 +33,7 @@ input[type=text] {
     transition: width 0.4s ease-in-out;
 }
 input[type=text]:focus {
-    width: 225%;
+    width: 200%;
 }
 #layercontrol{
   position: absolute; 
@@ -43,6 +45,19 @@ input[type=text]:focus {
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000; 
+}
+
+ul {
+  /*text-align: center;*/
+  position: relative;
+  left: 5%;
+}
+
+li {
+  text-align: center;
+  -webkit-text-size-adjust: auto;
+  background-color: #8f5f3c;
+  width: 70%
 }
 li { list-style-type: none; }
 li.span_item {
@@ -57,6 +72,11 @@ li.span_item_selected {
   padding: 0.1cm;
   margin: 0.1cm;
 }
+li:hover {
+  background-color: #efbbbb;
+}
+
+
 img {
   position: absolute;
   top: 0; bottom:0; left: 0; right:0;
@@ -94,9 +114,10 @@ p, h1{margin-left: 0.5cm;}
 
 /* Popup container */
 .popup {
-  position: relative;
-  top:50%;
-  bottom:150%;
+  position: absolute;
+  top: -10%;
+  /*left:-20%;*/
+  bottom: 150%;
   display: inline-block;
   cursor: pointer;
 }
@@ -111,12 +132,12 @@ p, h1{margin-left: 0.5cm;}
   font-size: 16px;
   font-weight: lighter;
   border-radius: 6px;
-  /*padding: 10px 0 150px 0;*/
+  padding: 10px 0 50px 0;
   position: absolute;
   z-index: 1;
-  top:100%;
-  bottom: 225%;
-  left: -1500%;
+  top: 150%;
+  bottom: 250%;
+  left: -850%;
   margin-left: -80px;
 }
 
