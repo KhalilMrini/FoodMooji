@@ -21,7 +21,8 @@ d3PieChart.update = function(el, country, food, from, to) {
     var pie = d3.layout.pie()
         .value(function(d) { return d.values; });
 
-    var color = {"1":"#e4e429", "2":"#29e487", "3":"#29e429", "4":"#29e4e4", "5":"#2929e4", "6":"#e42987", "7":"#e42929", "8":"#e48729"};
+    var color = {"1":"#efef84", "2":"#baef84", "3":"#84ef84", "4":"#84baef",
+                 "5":"#8484ef", "6":"#ef84ef", "7":"#ef8484", "8":"#efba84"};
 
     var radius = d3.select(el).select('svg').attr('radius')
 
