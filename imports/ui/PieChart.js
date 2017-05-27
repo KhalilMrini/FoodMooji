@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import d3pie from 'd3pie'
 
 var pie;
+var oldTitle = ""
 
 var d3PieChart = {};
 
@@ -41,7 +42,8 @@ d3PieChart.create = function(el, props, country, food, from, to) {
       size: { "canvasHeight": props.height, "canvasWidth": props.width },
       header: {
         title: {
-          text: "Distribution of emotion for " + food
+          text: "Distribution of emotion for " + food,
+          fontSize: 16
         },
         location: "pie-center"
       },
@@ -71,14 +73,13 @@ d3PieChart.create = function(el, props, country, food, from, to) {
       callbacks: {
         onClickSegment: function(a) {
           if (!a.expanded) {
-            console.log("Click")
-            $('#emoji').html(String.fromCodePoint(emojis[a.index]));
-            $('#emoji').fadeIn();
+            currentTitle = pie.options.header.title.text
+            if (currentTitle.indexOf("Distribution") > - 1) {
+              oldTitle = currentTitle
+            }
+            pie.updateProp("header.title.text", String.fromCodePoint(emojis[a.index])+ " " + String.fromCodePoint(emojis[a.index]) + " " + String.fromCodePoint(emojis[a.index]))
           } else {
-            console.log("UnClick")
-            $('#emoji').fadeOut(function() {
-              $('#emoji').html("");
-            });
+            pie.updateProp("header.title.text", oldTitle)
           }
         }
       }

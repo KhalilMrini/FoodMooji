@@ -61,11 +61,11 @@ export default class SplitScreen extends Component {
         if (value.split(',')[0] == this.state.food){
             return (
                 <li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
-                  <p id="p_item">{value.split(',')[0]+' '+value.split(',')[1]}</p></li>)
+                  <p id="p_item_selected">{value.split(',')[0]+' '+value.split(',')[1].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p></li>)
         } else {
             return (
                 <li className="span_item" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
-                  <p id="p_item">{value.split(',')[0]+' '+value.split(',')[1]}</p></li>)
+                  <p id="p_item">{value.split(',')[0]+' '+value.split(',')[1].replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p></li>)
         }
     }
 
@@ -105,7 +105,7 @@ export default class SplitScreen extends Component {
             </div>
           </div>
           <SplitPane split="horizontal" defaultSize="15%" style={{backgroundColor:'#252525'}}>
-            <div><p>Tweets about {len} kinds of food </p></div>
+            <div><p>Tweets about <b>{len}</b> kinds of food </p></div>
             <SplitPane split="horizontal" defaultSize="12%">
               <div>
                 <input id="myInput" type="text" onChange={function(e) {
@@ -147,17 +147,14 @@ export default class SplitScreen extends Component {
                 in Millions of Tweets, and 'translate' emojis into 8-emotion categories. </span>
               </div>
             </div>
-            <SplitPane split="horizontal" defaultSize="500">
-              <div>
-                <PieChart
-                  width="600"
-                  height="500"
-                  country={country}
-                  food={this.state.food}
-                  from={from}
-                  to={to} />
-                <div id="emoji"></div>
-              </div>
+            <SplitPane split="horizontal" defaultSize="80%">
+              <PieChart
+                width="700"
+                height="500"
+                country={country}
+                food={this.state.food}
+                from={from}
+                to={to} />
               <SplitPane split="vertical" defaultSize="10%">
                 <div></div>
                 <SplitPane split="vertical" defaultSize="89%">

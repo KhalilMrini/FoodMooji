@@ -18,7 +18,6 @@ body {
 }
 #pieChart {
   margin:auto;
-  position:absolute;
 }
 input[type=text] {
     height:90%;
@@ -123,7 +122,13 @@ p, h1{margin-left: 0.5cm;}
   height: auto;
   min-height: 100%;
 }
-#p_item { margin: 0.1cm; }
+#p_item { 
+  margin: 0.1cm; 
+}
+#p_item_selected { 
+  margin: 0.1cm; 
+  color: white;
+}
 .slider {
   margin: 1cm;
 }
