@@ -80,7 +80,7 @@ d3.tsv("linechart.tsv", type, function(error, data) {
 
 
 function type(d, _, columns) {
-  d.date = parseTime(d.date);
+  //d.date = parseTime(d.date);
   for (var i = 1, n = columns.length, c; i < n; ++i)
     d[c = columns[i]] = +d[c]
     console.log();

@@ -4,6 +4,7 @@ import { createContainer } from 'react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import FreeScrollBar from 'react-free-scrollbar'
 import PieChart from './PieChart.js'
+import LineChart from './LineChart_final.js'
 
 function readStringFromFileAtPath(pathOfFileToReadFrom){
   var request = new XMLHttpRequest();
@@ -154,14 +155,12 @@ export default class SplitScreen extends Component {
               </div>
             </div>
             <p>Graph for {this.state.food}</p>
-            <PieChart
+            <LineChart
               width={document.getElementById("render-target").offsetWidth*0.67}
               height="500"
               radius="250"
               country={country}
-              food={this.state.food}
-              from={from}
-              to={to} />
+              food={this.state.food} />
             <SplitPane split="vertical" defaultSize="10%">
               <div></div>
               <SplitPane split="vertical" defaultSize="89%">

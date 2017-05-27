@@ -43,18 +43,29 @@ d3PieChart.update = function(el, country, food, from, to) {
       if (error) throw error;
 
       var byCountry = data.filter(function(d) {
-        if (d["country"] == country & d["food"] == food & d["hour"] >= from & d["hour"] < to) {
+        if (d["country"] == country & d["food"] == food) {
           return d;
         }
       });
 
-      var byEmotion = d3.nest()
+      var byEmotion_aggregates = d3.nest()
         .key(function(d) { return d.emotion; })
         .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
         .entries(byCountry);
+        
+      var byEmotion_Hour = d3.nest()
+        .key(function(d) { return d.emotion; })
+        .key(function(d) { return d.hour; })
+        .entries(byCountry);  
+       
+      console.log(byCountry);  
+      console.log(byEmotion_aggregates);
+      console.log(byEmotion_Hour);
+        
+ 
 
       var arcs = d3.select(el).select('svg').select('g').selectAll("g.slice")
-          .data(pie(byEmotion))
+          .data(pie(byEmotion_aggregates))
           .enter()
         .append("svg:g")
           .attr("class", "slice");
