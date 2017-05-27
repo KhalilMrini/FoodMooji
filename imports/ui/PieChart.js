@@ -26,6 +26,8 @@ d3PieChart.create = function(el, props, country, food, from, to) {
     var labels = ["joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation"];
     var colors = ["#efef84", "#baef84", "#84ef84", "#84baef",
                  "#8484ef", "#ef84ef", "#ef8484", "#efba84"];
+    var emojis = [0x1F601, 0x1F64F, 0x1F480, 0x1F632, 0x1F622, 0x1F637, 0x1F621, 0x1F609];
+
     pieData = [];
     for (var i = 0; i < byEmotion.length; i++) {
       pieData.push({
@@ -36,6 +38,7 @@ d3PieChart.create = function(el, props, country, food, from, to) {
       })
     }
     pie = new d3pie(el, {
+      size: { "canvasHeight": 500, "canvasWidth": 500 },
       header: {
         title: {
           text: "Distribution of emotion for " + food
@@ -61,6 +64,18 @@ d3PieChart.create = function(el, props, country, food, from, to) {
         type: "placeholder",
         string: "{value} tweets ({percentage}%)",
         styles: {fontSize: 16}
+      },
+      callbacks: {
+        onClickSegment: function(a) {
+          if (!a.expanded) {
+            $('#emoji').html(String.fromCodePoint(emojis[a.index]));
+            $('#emoji').fadeIn();
+          } else {
+            $('#emoji').fadeOut(function() {
+              $('#emoji').html("");
+            });
+          }
+        }
       }
     });
   });
@@ -86,6 +101,8 @@ d3PieChart.update = function(el, props, country, food, from, to) {
     var labels = ["joy", "trust", "fear", "surprise", "sadness", "disgust", "anger", "anticipation"];
     var colors = ["#efef84", "#baef84", "#84ef84", "#84baef",
                  "#8484ef", "#ef84ef", "#ef8484", "#efba84"];
+    var emojis = [0x1F601, 0x1F64F, 0x1F480, 0x1F632, 0x1F622, 0x1F637, 0x1F621, 0x1F609];
+
     pieData = [];
     for (var i = 0; i < byEmotion.length; i++) {
       pieData.push({
@@ -133,7 +150,7 @@ export default class PieChart extends Component {
 
   render() {
     return (
-      <div className="PieChart" id="pieChart"></div>
+      <div className="PieChart" id="pieChart"><div id="emoji"></div></div>
     );
   }
 }
