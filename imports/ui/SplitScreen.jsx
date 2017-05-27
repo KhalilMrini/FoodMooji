@@ -57,19 +57,17 @@ export default class SplitScreen extends Component {
     this.setState({food: value.split(',')[0]})
   }
 
-  renderItem(value){
-    if (value.split(',')[0] == this.state.food){
-      return (
-        <li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
-          <p id="p_item">{value}</p>
-        </li>)
-    } else {
-      return (
-        <li className="span_item" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
-          <p id="p_item">{value}</p>
-        </li>)
+    renderItem(value){
+        if (value.split(',')[0] == this.state.food){
+            return (
+                <li className="span_item_selected" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+                  <p id="p_item">{value.split(',')[0]+' '+value.split(',')[1]}</p></li>)
+        } else {
+            return (
+                <li className="span_item" id={value} key={value} onClick={this.handleClick.bind(this, value)}>
+                  <p id="p_item">{value.split(',')[0]+' '+value.split(',')[1]}</p></li>)
+        }
     }
-  }
 
   filterList(country, item){
     if (item) {
@@ -106,7 +104,7 @@ export default class SplitScreen extends Component {
               –<input type="range" id="opacity2" min="0" max="18" step="1" value="2" onChange={function(e){ this.props.value = e.target.value}} />+<br />
             </div>
           </div>
-          <SplitPane split="horizontal" defaultSize="15%">
+          <SplitPane split="horizontal" defaultSize="15%" style={{backgroundColor:'#252525'}}>
             <div><p>Tweets about {len} kinds of food </p></div>
             <SplitPane split="horizontal" defaultSize="12%">
               <div>
