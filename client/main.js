@@ -115,8 +115,6 @@ function build_slider(){
       }
     },
     onFinish: function (data) {
-      console.log(data);
-      console.log(document.getElementById('screen'))
       from = data.from
       to = data.to
       render(<SplitScreen id="screen" country={country} from={from} to={to} />, document.getElementById('render-target'));

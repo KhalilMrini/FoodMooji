@@ -79,7 +79,6 @@ export default class SplitScreen extends Component {
     var country = this.props.country ? this.props.country : "World"
     var list = this.state.tweets_country[country]
     var len = list ? list.length : 0
-    console.log(country + " " + this.state.food)
     var from = this.props.from ? this.props.from : 0
     var to = this.props.to ? this.props.to : 24
     return (
