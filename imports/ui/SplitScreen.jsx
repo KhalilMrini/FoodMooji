@@ -19,26 +19,6 @@ function compareNumbers(a, b) {
   return value_b - value_a;
 }
 
-<<<<<<< HEAD
-function processData() {
-  var text = readStringFromFileAtPath("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_data.csv")
-  var raw_lines = text.split('\n')
-  var headers = raw_lines[0].split(',')
-  var lines = [];
-
-  for (var i = 1; i < raw_lines.length; i++) {
-    var elements = raw_lines[i].split(',')
-    var object = { };
-    for (var j = 0; j < headers.length; j++) {
-      object[headers[j]] = elements[j];
-    }
-    lines.push(object);
-  }
-  return lines;
-}
-
-=======
->>>>>>> master
 function processCountries() {
   var text = readStringFromFileAtPath("https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/tweets_country.csv")
   var raw_lines = text.split('\n')
@@ -113,13 +93,7 @@ export default class SplitScreen extends Component {
       fontSize: "40px"
     };
     var country = this.props.country ? this.props.country : "World"
-<<<<<<< HEAD
-    //var list = this.state.tweets_country[country]
-console.log(list);
-    var list = this.state.tweets_data;
-=======
     var list = this.filterList(country, "")
->>>>>>> master
     var len = list ? list.length : 0
     var from = this.props.from ? this.props.from : 0
     var to = this.props.to ? this.props.to : 24
@@ -166,15 +140,6 @@ console.log(list);
             </SplitPane>
           </SplitPane>
         </SplitPane>
-<<<<<<< HEAD
-        <SplitPane split="horizontal" defaultSize="10%">
-          <div>
-            <h1 style={divStyle}>FoodMooji</h1>
-          </div>
-          <div>
-            <p>Graph</p>
-            <p>{drawPie(list, country, "All")}</p>
-=======
         <SplitPane split="horizontal" defaultSize="15%">
           <div id="title"><img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" /></div>
           <div id="graph_div">
@@ -194,10 +159,6 @@ console.log(list);
               height="500"
               radius="250"
               country={country}
-<<<<<<< HEAD
-              food={this.state.food} />
->>>>>>> master
-=======
               food={this.state.food}
               from={from}
               to={to} />
@@ -208,7 +169,6 @@ console.log(list);
                 <div></div>
               </SplitPane>
             </SplitPane>
->>>>>>> master
           </div>
         </SplitPane>
       </SplitPane>)
