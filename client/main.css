@@ -17,7 +17,6 @@ body {
   left: 10px;
 }
 #pieChart {
-  display: block;
   margin:auto;
 }
 input[type=text] {
@@ -103,8 +102,8 @@ p, h1{margin-left: 0.5cm;}
 /* class divs */
 #emoji {
   position: absolute;
-  z-index: -1;
-  width: 100%;
+  z-index: 1;
+  width: 600px;
   height: 500px;
   margin: auto;
   font-size: 100pt;
@@ -112,6 +111,7 @@ p, h1{margin-left: 0.5cm;}
   vertical-align: middle;
   line-height: 500px;
   display: none;
+  pointer-events: none;
 }
 
 #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
