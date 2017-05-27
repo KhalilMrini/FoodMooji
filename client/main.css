@@ -13,7 +13,26 @@ body {
   bottom:20px; 
   left: 10px;
 }
-
+input[type=text] {
+    height:100%;
+    margin:0;
+    width:100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('https://cdn0.iconfinder.com/data/icons/octicons/1024/search-128.png');
+    background-size: 20px 20px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 0px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 225%;
+}
 #layercontrol{
   position: absolute; 
   top:10px; 

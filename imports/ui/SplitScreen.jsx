@@ -71,13 +71,29 @@ export default class SplitScreen extends Component {
     }
   }
 
+  filterList(country, item){
+    if (item) {
+      if (this.state.tweets_country[country]) {
+        return this.state.tweets_country[country].filter((value) => value.startsWith(item))
+      } else {
+        return null
+      }
+    } else {
+      if (this.state.tweets_country[country]) {
+        return this.state.tweets_country[country]
+      } else {
+        return null
+      }
+    }
+  }
+
   render() {
     var divStyle = {
       fontFamily: "Palatino Linotype, Times, serif",
       fontSize: "40px"
     };
     var country = this.props.country ? this.props.country : "World"
-    var list = this.state.tweets_country[country]
+    var list = this.filterList(country, "")
     var len = list ? list.length : 0
     var from = this.props.from ? this.props.from : 0
     var to = this.props.to ? this.props.to : 24
@@ -91,14 +107,38 @@ export default class SplitScreen extends Component {
               <input type="button" id="backToWorld" value="Go Back to World" />
             </div>
             <div id="layercontrol">
-              –<input type="range" id="opacity2" min="0" max="18" step="1" value="2" onChange={function (e){ this.props.value = e.target.value;}} />+<br />
+              –<input type="range" id="opacity2" min="0" max="18" step="1" value="2" onChange={function(e){ this.props.value = e.target.value}} />+<br />
             </div>
-            //<span className="popuptext" id="countryPopup">We filter food words as well as emojis in Millions of Tweets, and 'translate' emojis into 8-emotion categories. </span>
           </div>
-          <FreeScrollBar>
-            <p>Food tweeted about in <b>{country}</b>: {len} items </p>
-            { list ? <ul>{list.map((value) => this.renderItem(value))}</ul> : null }
-          </FreeScrollBar>
+          <SplitPane split="horizontal" defaultSize="15%">
+            <div><p>Food tweeted about in <b>{country}</b>: {len} items </p></div>
+            <SplitPane split="horizontal" defaultSize="12%">
+              <div>
+                <input id="myInput" type="text" onChange={function(e) {
+                  // Declare variables
+                  var input, filter, table, tr, td, i;
+                  input = document.getElementById("myInput");
+                  filter = input.value.toUpperCase();
+                  table = document.getElementById("myList");
+                  tr = table.getElementsByTagName("li");
+                  // Loop through all table rows, and hide those who don't match the search query
+                  for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("p")[0];
+                    if (td) {
+                      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                      } else {
+                        tr[i].style.display = "none";
+                      }
+                    } 
+                  }
+                }} placeholder="Search for food..." />
+              </div>
+              <FreeScrollBar>
+                  { list ? <ul id="myList">{list.map((value) => this.renderItem(value))}</ul> : null }
+              </FreeScrollBar>
+            </SplitPane>
+          </SplitPane>
         </SplitPane>
         <SplitPane split="horizontal" defaultSize="15%">
           <div id="title"><img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" /></div>
@@ -107,7 +147,7 @@ export default class SplitScreen extends Component {
               <div className="popup" onMouseOver={myFunction} onMouseOut={myFunction} style={{
                   textAlign: "right", width: 30, height: 30,
                   backgroundImage: 'url("http://www.inspativity.com/wp-content/uploads/2016/03/i-icon-1-227x300.png")',
-                  backgroundRepeat: 'no-repeat', backgroundSize: '20'
+                  backgroundRepeat: 'no-repeat', backgroundSize: 20
               }} alt="info">
               <span className="popuptext" id="myPopup">We filter food words as well as emojis
                 in Millions of Tweets, and 'translate' emojis into 8-emotion categories. </span>
