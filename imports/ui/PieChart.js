@@ -71,9 +71,11 @@ d3PieChart.create = function(el, props, country, food, from, to) {
       callbacks: {
         onClickSegment: function(a) {
           if (!a.expanded) {
+            console.log("Click")
             $('#emoji').html(String.fromCodePoint(emojis[a.index]));
             $('#emoji').fadeIn();
           } else {
+            console.log("UnClick")
             $('#emoji').fadeOut(function() {
               $('#emoji').html("");
             });

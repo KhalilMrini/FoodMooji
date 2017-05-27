@@ -149,7 +149,7 @@ export default class SplitScreen extends Component {
             </div>
             <SplitPane split="horizontal" defaultSize="500">
               <PieChart
-                width={document.getElementById("render-target").offsetWidth*0.67}
+                width="600"
                 height="500"
                 country={country}
                 food={this.state.food}

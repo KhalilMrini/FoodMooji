@@ -16,6 +16,10 @@ body {
   bottom:20px; 
   left: 10px;
 }
+#pieChart {
+  display: block;
+  margin:auto;
+}
 input[type=text] {
     height:90%;
     margin:0;
