@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import d3pie from 'd3pie'
-import * as j from 'jquery'
 
 var pie;
 
@@ -115,7 +114,7 @@ d3PieChart.update = function(el, props, country, food, from, to) {
         label: labels[i],
         value: byEmotion[i].values,
         color: colors[i],
-        caption: byEmotion[i].values + " tweets for " + labels[i]
+        caption: byEmotion[i].values + " tweets"
       })
     }
     pie.updateProp("data.content", pieData);
@@ -156,7 +155,7 @@ export default class PieChart extends Component {
 
   render() {
     return (
-      <div className="PieChart" id="pieChart"><div id="emoji"></div></div>
+      <div className="PieChart" id="pieChart"></div>
     );
   }
 }

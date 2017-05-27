@@ -148,13 +148,16 @@ export default class SplitScreen extends Component {
               </div>
             </div>
             <SplitPane split="horizontal" defaultSize="500">
-              <PieChart
-                width="600"
-                height="500"
-                country={country}
-                food={this.state.food}
-                from={from}
-                to={to} />
+              <div>
+                <PieChart
+                  width="600"
+                  height="500"
+                  country={country}
+                  food={this.state.food}
+                  from={from}
+                  to={to} />
+                <div id="emoji"></div>
+              </div>
               <SplitPane split="vertical" defaultSize="10%">
                 <div></div>
                 <SplitPane split="vertical" defaultSize="89%">
