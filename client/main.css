@@ -8,6 +8,42 @@ body {
   padding: 0;
   height: 100%;
 }
+#buttons {
+  position: absolute; 
+  bottom:20px; 
+  left: 10px;
+}
+input[type=text] {
+    height:100%;
+    margin:0;
+    width:100%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('https://cdn0.iconfinder.com/data/icons/octicons/1024/search-128.png');
+    background-size: 20px 20px;
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 0px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+input[type=text]:focus {
+    width: 225%;
+}
+#layercontrol{
+  position: absolute; 
+  top:10px; 
+  right: 10px;
+  color: white;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
 li { list-style-type: none; }
 li.span_item {
   color: #252525;
@@ -28,7 +64,17 @@ img {
   height: 100%;
 }
 p, h1{margin-left: 0.5cm;}
-
+.onMap{
+  margin:0;
+  margin-left:0.1cm;
+  padding:0;
+  color: white;
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000; 
+}
 /* class divs */
 #earth_div{top: 0; right: 0; bottom: 0; left: 0; position: absolute !important;}
 
@@ -39,6 +85,10 @@ p, h1{margin-left: 0.5cm;}
   min-height: 100%;
 }
 #p_item { margin: 0.1cm; }
+
+.slider {
+  margin: 1cm;
+}
 
 /* Popup container */
 .popup {
