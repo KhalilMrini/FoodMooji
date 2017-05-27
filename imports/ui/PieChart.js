@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import d3pie from 'd3pie'
+import * as j from 'jquery'
 
 var pie;
 
@@ -38,7 +39,7 @@ d3PieChart.create = function(el, props, country, food, from, to) {
       })
     }
     pie = new d3pie(el, {
-      size: { "canvasHeight": 500, "canvasWidth": 500 },
+      size: { "canvasHeight": props.height, "canvasWidth": props.width },
       header: {
         title: {
           text: "Distribution of emotion for " + food
