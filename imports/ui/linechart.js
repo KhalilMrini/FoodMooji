@@ -13,14 +13,16 @@ var x = d3.scaleTime().range([0, width]),
 var line = d3.line()
     .curve(d3.curveBasis)
     .x(function(d) { return x(d.date); })
-    .y(function(d) { return y(d.tweets); });
+    .y(function(d) { 
+    //console.log(d.tweets);
+    return y(d.tweets); });
 
 
 
 d3.tsv("linechart.tsv", type, function(error, data) {
   if (error) throw error;
     
-    console.log(data);
+    //console.log(data);
 
   var emotions = data.columns.slice(1).map(function(id) {
     return {
@@ -31,7 +33,7 @@ d3.tsv("linechart.tsv", type, function(error, data) {
     };
   });
     
-    console.log(emotions);
+    //console.log(emotions);
 
     
 
@@ -66,7 +68,9 @@ d3.tsv("linechart.tsv", type, function(error, data) {
 
   emotion.append("path")
       .attr("class", "line")
-      .attr("d", function(d) { return line(d.values); })
+      .attr("d", function(d) { 
+      console.log(d.values);
+      return line(d.values); })
       .style("stroke", function(d) { return z(d.id); });
 
   emotion.append("text")

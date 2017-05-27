@@ -30,8 +30,8 @@ d3LineChart.update = function(el, props, country, food) {
 
     var line = d3.line()
         .curve(d3.curveBasis)
-        .x(function(d) { return x(d.hour); })
-        .y(function(d) { return y(d.values.sum); });
+        .x(function(d) { return x(d.key); })
+        .y(function(d) { return y(d.value); });
     
     
     
@@ -51,23 +51,24 @@ d3LineChart.update = function(el, props, country, food) {
         
       var byEmotion_Hour = d3.nest()
         .key(function(d) { return d.emotion; })
-        .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
         .key(function(d) { return d.hour; })
-        .entries(byCountry);  
+        .rollup(function(v) { return d3.sum(v, function(d) { return d.sum; }); })
+        .entries(byCountry);
        
       console.log(byCountry);  
       console.log(byEmotion_Hour);
         
-    x.domain(d3.extent(data, function(d) { return d.hour; }));
+    x.domain(d3.extent(byEmotion_Hour, function(d) { return d.values.key; }));
 
     y.domain([
-        d3.min(byEmotion_Hour, function(c) { return d3.min(c.values, function(d) { return d.values.sum; }); }),
-        d3.max(byEmotion_Hour, function(c) { return d3.max(c.values, function(d) { return d.values.sum; }); })
+        d3.min(byEmotion_Hour, function(c) { return d3.min(c.values, function(d) { return d.value; }); }),
+        
+        d3.max(byEmotion_Hour, function(c) { return d3.max(c.values, function(d) { return d.value; }); })
         ]);
 
     z.domain(byEmotion_Hour.map(function(c) { return c.key; }));
         
-    var g = d3.select(el).select("svg").select("g")
+    var g = d3.select(el).select("svg").select("g");
    
     g.append("g")
       .attr("class", "axis axis--x")
@@ -91,12 +92,14 @@ d3LineChart.update = function(el, props, country, food) {
 
       emo.append("path")
           .attr("class", "line")
-          .attr("d", function(d) { return line(d.values.values.sum); })
+          .attr("d", function(d) { 
+          console.log(d.values);
+          return line(d.values); })
           .style("stroke", function(d) { return z(d.key); });
 
       emo.append("text")
-          .datum(function(d) { return {key: d.key, value: d.values[d.values.length - 1]}; })
-          .attr("transform", function(d) { return "translate(" + x(d.values.hour) + "," + y(d.values.sum) + ")"; })
+          .datum(function(d) { return {key: d.key, value: d.values[d.value.length - 1]}; })
+          .attr("transform", function(d) { return "translate(" + x(d.values.key) + "," + y(d.values.value) + ")"; })
           .attr("x", 3)
           .attr("dy", "0.35em")
           .style("font", "12px sans-serif")
