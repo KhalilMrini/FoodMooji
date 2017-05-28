@@ -134,13 +134,13 @@ export default class SplitScreen extends Component {
             </SplitPane>
           </SplitPane>
         </SplitPane>
-        <SplitPane split="horizontal" defaultSize="15%">
+        <SplitPane split="horizontal" defaultSize="15%" >
           <div id="title"><img src="https://raw.githubusercontent.com/KhalilMrini/FoodMooji/master/images/FoodMooji.png" /></div>
           <div id="graph_div">
             <div style={{textAlign: "right", width: "90%"}}>
               <div className="popup" onMouseOver={myFunction} onMouseOut={myFunction} style={{
                   textAlign: "right", width: 50, height: 50,
-                  backgroundImage: 'url("http://www.freeiconspng.com/uploads/file-light-bulb-yellow-icon-svg-2.png")',
+                  backgroundImage: 'url("http://www.pngmart.com/files/1/Light-Bulb-PNG-Free-Download.png")',
                   backgroundRepeat: 'no-repeat', backgroundSize: 40
               }} alt="info">
               <span className="popuptext" id="myPopup">We filter food words as well as emojis

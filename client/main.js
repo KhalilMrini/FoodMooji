@@ -104,6 +104,7 @@ function build_slider(){
     grid: true,
     force_edges:true,
     drag_interval:true,
+    fontcolor: 444444,
     prettify: function (num) {
       if (num == 0 || num == 24){
         return "Midnight";

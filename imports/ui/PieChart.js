@@ -43,9 +43,11 @@ d3PieChart.create = function(el, props, country, food, from, to) {
       header: {
         title: {
           text: "Distribution of emotion for " + food,
+          fill:'pink',
           fontSize: 16
         },
-        location: "pie-center"
+        location: "pie-center",
+          padding: 252525
       },
       size: {
         canvasHeight: props.height,
