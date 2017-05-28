@@ -2,13 +2,15 @@
 
 Data Visualization about Tweets on Food categorised by Mood (Emotion) using Emoji.
 
+Designed, developed, and tested for compatibility with Google Chrome.
+
 ## Installation (OS X)
 
 1. Clone the repo `git clone https://github.com/KhalilMrini/FoodMooji.git`
 2. Install `meteor` if you do not have it (`brew install meteor`)
 3. In the project directory, run `meteor npm install` to install all dependencies
 4. Execute `meteor` to launch the server
-5. Open `Chrome` browser and navigate to `localhost:3000` to access the app
+5. Open your Chrome browser and navigate to `localhost:3000` to access the app
 
 ## Installation (Windows)
 
@@ -16,4 +18,4 @@ Data Visualization about Tweets on Food categorised by Mood (Emotion) using Emoj
 2. Download and install `meteor` from `https://www.meteor.com/install` (It takes time!)
 3. Run `cmd` and switch path to the project directory. Run `meteor npm install` to install dependencies
 4. Execute `meteor` to launch the server
-5. Open `Chrome` browser and navigate to `localhost:3000` to access the app
+5. Open your Chrome browser and navigate to `localhost:3000` to access the app
